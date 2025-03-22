@@ -1,4 +1,4 @@
-#SillyTavern-SimpleQRBarToggle
+# SillyTavern-SimpleQRBarToggle
 
 
 Adds Quick Replies Bar Hide Toggle 
