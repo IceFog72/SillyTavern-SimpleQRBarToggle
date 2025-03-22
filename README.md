@@ -1,7 +1,7 @@
 # SillyTavern-SimpleQRBarToggle
 
 
-Adds Quick Replies Bar Hide Toggle 
+Adds Quick Replies Bar Hide Toggle Button
 ## Installation
 
 Use ST's inbuilt extension installer with this URL:  
