@@ -1,0 +1,2 @@
+# SillyTavern-SimpleQRBarToggle
+# SillyTavern-SimpleQRBarToggle
