@@ -23,4 +23,3 @@ Edit open height add to css:
 My discord [https://discord.gg/2tJcWeMjFQ](https://discord.gg/2tJcWeMjFQ)
 
 [ko-fi](https://ko-fi.com/icefog72)
-# SillyTavern-SimpleQRBarToggle
