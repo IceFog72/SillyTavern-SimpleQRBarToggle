@@ -1,0 +1,11 @@
+{
+    "display_name": "Simple QR Bar Toggle",
+    "loading_order": 100,
+    "requires": [],
+    "optional": [],
+    "js": "index.js",
+    "css": "style.css",
+    "author": "icefog72",
+    "version": "0.0.1",
+    "homePage": "https://github.com/IceFog72/SillyTavern-SimpleQRBarToggle"
+}

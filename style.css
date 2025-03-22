@@ -1,0 +1,38 @@
+
+
+.sqrbt-toggle_button-collapsed  {
+    height: 2px !important;
+}
+
+.sqrbt-toggle_button-expanded {
+    height: var(--SQRBT-open-panel-height) !important;
+}
+
+#qr_toggle_button {
+    order: 2; 
+}
+#options_button {
+    order: 0; 
+}
+#extensionsMenuButton {
+    order: 1;  
+}
+#leftSendForm {
+    display: flex; 
+    flex-direction: row; 
+}
+#qr--bar .qr--buttons .qr--button {
+    margin: 0px 3px !important;
+}
+#qr--bar > .qr--buttons{ 
+    margin: 0px 3px !important;
+}
+#qr--bar{
+    transition: 0.1s;
+    border-top: 2px solid var(--SmartThemeQuoteColor);
+    height: 2px;
+    }
+
+:root {
+    --SQRBT-open-panel-height: 36px;
+}
