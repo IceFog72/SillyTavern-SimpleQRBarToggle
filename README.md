@@ -8,9 +8,9 @@ Use ST's inbuilt extension installer with this URL:
 `https://github.com/IceFog72/SillyTavern-SimpleQRBarToggle`
 
 ## Usage
+![image](https://github.com/user-attachments/assets/6411f977-221d-469f-99ec-841ad2c5fdb0)
+![image](https://github.com/user-attachments/assets/de82cba8-95cf-4c32-8cb8-564fccc58cb4)
 
-![image](https://github.com/user-attachments/assets/a55032e5-8ee2-4ee1-843a-0d67df8e9fa5)
-![image](https://github.com/user-attachments/assets/406dbcb0-d3e2-4a6a-86ed-2dd867475083)
 
 Edit open height add to css:
 ```
