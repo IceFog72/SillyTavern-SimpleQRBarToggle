@@ -6,56 +6,105 @@ class QrBarToggle {
     constructor() {
         this.isAppReady = false;
         this.isOpen = false;
+        this.listenerAttached = false;
+        this.qrBarBaseClass = ''; // Store the base class name of the QR bar
     }
     
     initialize() {
         eventSource.on(event_types.APP_READY, () => {
+            console.log("SimpleQRBarToggle: APP_READY");
             this.isAppReady = true;
-            this.addToggleButton();
-           
+            this.ensureButtonExists();
+            this.applyState(); // Apply initial state
+        });
+
+        // Also run on CHAT_CHANGED as the UI might redraw
+        eventSource.on(event_types.CHAT_CHANGED, () => {
+            if (!this.isAppReady) return;
+            this.ensureButtonExists();
+            this.applyState();
         });
     }
 
-    addToggleButton() {
-        // Create the new button element
-        const toggleButton = document.createElement('div');
-        toggleButton.id = 'qr_toggle_button';
-        toggleButton.className = 'fa-solid fa-chevron-up interactable';
-        toggleButton.tabIndex = 0;
-        toggleButton.title = 'Toggle QR Bar';
-        toggleButton.style.display = 'flex';
-        
-        // Get the leftSendForm element
-        const leftSendForm = document.getElementById('leftSendForm');
-        
+    // Ensures the button exists in the DOM and has the listener attached
+    ensureButtonExists() {
+        if (!this.isAppReady) return;
+        let toggleButton = document.getElementById('qr_toggle_button');
         const extensionsMenuButton = document.getElementById('extensionsMenuButton');
 
-        if (leftSendForm && extensionsMenuButton) {
+        if (!toggleButton && extensionsMenuButton) {
+            toggleButton = this.createToggleButtonElement();
             extensionsMenuButton.insertAdjacentElement('afterend', toggleButton);
-            
-            const qrBarnames = document.getElementById('qr--bar').className;
-            // Set initial state (collapsed)
-            
-            // Add click event listener to toggle button
-            toggleButton.addEventListener('click', () => {
-                var qrBar = document.getElementById('qr--bar');
-                if (qrBar) {
-                    this.isOpen = !this.isOpen;
-                    
-                    // Toggle height between collapsed and expanded
-                    if (this.isOpen) {
-                        qrBar.className= qrBarnames + ' sqrbt-toggle_button-expanded';
-                        qrBar.style.borderTopColor = 'var(--SmartThemeBodyColor)'; // Change border color when expanded
-                        toggleButton.className = 'fa-solid fa-chevron-down interactable'; // Change to expanded icon
-                        toggleButton.title = 'Collapse QR Bar';
-                    } else {
-                        qrBar.className= qrBarnames + ' sqrbt-toggle_button-collapsed';
-                        qrBar.style.borderTopColor = 'var(--SmartThemeQuoteColor)'; // Restore original border color
-                        toggleButton.className = 'fa-solid fa-chevron-up interactable'; // Change to collapsed icon
-                        toggleButton.title = 'Expand QR Bar';
-                    }
-                }
-            });
+            this.attachListener(toggleButton); // Attach listener only when creating
+        } else if (toggleButton && !this.listenerAttached) {
+            console.log("SimpleQRBarToggle: Button found, attaching listener...");
+            this.attachListener(toggleButton);
+        }
+    }
+
+    // Creates the button DOM element
+    createToggleButtonElement() {
+        const button = document.createElement('div');
+        button.id = 'qr_toggle_button';
+        // Initial state is collapsed
+        button.className = 'fa-solid fa-chevron-up interactable';
+        button.tabIndex = 0;
+        button.title = 'Expand QR Bar';
+        button.style.display = 'flex';
+        return button;
+    }
+
+    // Attaches the click listener
+    attachListener(buttonElement) {
+        if (this.listenerAttached) return; // Don't attach multiple times
+
+        buttonElement.addEventListener('click', () => {
+            this.isOpen = !this.isOpen;
+            this.applyState();
+        });
+        this.listenerAttached = true;
+        console.log("SimpleQRBarToggle: Listener attached.");
+    }
+
+    // Applies the visual state based on this.isOpen
+    applyState() {
+        if (!this.isAppReady) return;
+
+        const qrBar = document.getElementById('qr--bar');
+        const toggleButton = document.getElementById('qr_toggle_button');
+
+        if (!qrBar || !toggleButton) {
+            console.log("SimpleQRBarToggle: QR Bar or Button not found during applyState.");
+            // Attempt to recreate button just in case it got removed between checks
+            this.ensureButtonExists();
+            return;
+        }
+
+        // Store base class name on first successful application
+        if (!this.qrBarBaseClass && qrBar.className) {
+            // Remove our specific classes if they somehow exist already
+            this.qrBarBaseClass = qrBar.className
+                .replace(' sqrbt-toggle_button-expanded', '')
+                .replace(' sqrbt-toggle_button-collapsed', '');
+            console.log(`SimpleQRBarToggle: Stored base class: "${this.qrBarBaseClass}"`);
+        }
+        
+        // Ensure we have a base class to work with
+        const baseClass = this.qrBarBaseClass || qrBar.className
+            .replace(' sqrbt-toggle_button-expanded', '')
+            .replace(' sqrbt-toggle_button-collapsed', '');
+
+
+        if (this.isOpen) {
+            qrBar.className = `${baseClass} sqrbt-toggle_button-expanded`;
+            qrBar.style.borderTopColor = 'var(--SmartThemeBodyColor)';
+            toggleButton.className = 'fa-solid fa-chevron-down interactable';
+            toggleButton.title = 'Collapse QR Bar';
+        } else {
+            qrBar.className = `${baseClass} sqrbt-toggle_button-collapsed`;
+            qrBar.style.borderTopColor = 'var(--SmartThemeQuoteColor)';
+            toggleButton.className = 'fa-solid fa-chevron-up interactable';
+            toggleButton.title = 'Expand QR Bar';
         }
     }
 }
