@@ -97,12 +97,12 @@ class QrBarToggle {
 
         if (this.isOpen) {
             qrBar.className = `${baseClass} sqrbt-toggle_button-expanded`;
-            qrBar.style.borderTopColor = 'var(--SmartThemeBodyColor)';
+            //qrBar.style.borderTopColor = 'var(--SmartThemeBodyColor)';
             toggleButton.className = 'fa-solid fa-chevron-down interactable';
             toggleButton.title = 'Collapse QR Bar';
         } else {
             qrBar.className = `${baseClass} sqrbt-toggle_button-collapsed`;
-            qrBar.style.borderTopColor = 'var(--SmartThemeQuoteColor)';
+            //qrBar.style.borderTopColor = 'var(--SmartThemeQuoteColor)';
             toggleButton.className = 'fa-solid fa-chevron-up interactable';
             toggleButton.title = 'Expand QR Bar';
         }
