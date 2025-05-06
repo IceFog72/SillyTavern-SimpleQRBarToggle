@@ -25,7 +25,7 @@
     margin: 0px 3px !important;
 }
 #qr--bar > .qr--buttons{ 
-    margin: 0px 3px !important;
+    /*margin: 0px 3px !important;*/
 }
 #qr--bar{
     transition: 0.1s;
