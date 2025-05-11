@@ -31,8 +31,8 @@
     transition: 0.1s;
     /*
     border-top: 2px solid var(--SmartThemeQuoteColor);
-    */
-    height: 2px;
+    
+    height: 2px;*/
     }
 
 :root {
