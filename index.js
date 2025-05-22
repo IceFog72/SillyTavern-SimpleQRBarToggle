@@ -123,7 +123,6 @@ class QrBarToggle {
             const buttonsInQrBar = qrBar.querySelectorAll('.qr--button, [id^="qr_"], .inline-drawer-toggle');
             buttonsInQrBar.forEach(button => {
                 button.style.pointerEvents = 'none';
-                button.style.opacity = '0.5'; // Visually indicate disabled state
                 if (button.tagName === 'BUTTON' || (button.tagName === 'INPUT' && button.type === 'button')) {
                     button.disabled = true;
                 }
