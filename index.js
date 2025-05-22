@@ -100,36 +100,15 @@ class QrBarToggle {
             //qrBar.style.borderTopColor = 'var(--SmartThemeBodyColor)';
             toggleButton.className = 'fa-solid fa-chevron-down interactable';
             toggleButton.title = 'Collapse QR Bar';
-
-            // Enable buttons within QR bar
-            const buttonsInQrBar = qrBar.querySelectorAll('.qr--button, [id^="qr_"], .inline-drawer-toggle');
-            buttonsInQrBar.forEach(button => {
-                button.style.pointerEvents = 'auto';
-                button.style.opacity = '1';
-                if (button.tagName === 'BUTTON' || (button.tagName === 'INPUT' && button.type === 'button')) {
-                    button.disabled = false;
-                }
-                if (button.hasAttribute('aria-disabled')) {
-                    button.setAttribute('aria-disabled', 'false');
-                }
-            });
+            qrBar.style.pointerEvents = 'auto';
+            qrBar.setAttribute('aria-hidden', 'false');
         } else {
             qrBar.className = `${baseClass} sqrbt-toggle_button-collapsed`;
             //qrBar.style.borderTopColor = 'var(--SmartThemeQuoteColor)';
             toggleButton.className = 'fa-solid fa-chevron-up interactable';
             toggleButton.title = 'Expand QR Bar';
-
-            // Disable buttons within QR bar
-            const buttonsInQrBar = qrBar.querySelectorAll('.qr--button, [id^="qr_"], .inline-drawer-toggle');
-            buttonsInQrBar.forEach(button => {
-                button.style.pointerEvents = 'none';
-                if (button.tagName === 'BUTTON' || (button.tagName === 'INPUT' && button.type === 'button')) {
-                    button.disabled = true;
-                }
-                if (button.hasAttribute('aria-disabled')) {
-                    button.setAttribute('aria-disabled', 'true');
-                }
-            });
+            qrBar.style.pointerEvents = 'none';
+            qrBar.setAttribute('aria-hidden', 'true');
         }
     }
 }
