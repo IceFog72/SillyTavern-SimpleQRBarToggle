@@ -2,10 +2,12 @@
 
 .sqrbt-toggle_button-collapsed  {
     height: 0px !important;
+    display: none !important;
 }
 
 .sqrbt-toggle_button-expanded {
     height: var(--SQRBT-open-panel-height) !important;
+    display: flex !important;
 }
 
 #qr_toggle_button {
